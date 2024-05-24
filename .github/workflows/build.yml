@@ -1,0 +1,138 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [ opened, labeled, unlabeled, synchronize ]
+
+env:
+  GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
+  JAVA_VERSION: 21
+  ANDROID_API_LEVEL: 34
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    permissions:
+      checks: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v4.1.7
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/actions/wrapper-validation@v3.5.0
+
+      - name: Configure JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4.2.1
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: gradle
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3.5.0
+      - run: ./gradlew --version
+
+      - name: Run Ktlint Check On All Sources
+        run: ./gradlew ktlintCheck -s
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug -s
+
+      - name: Run Debug Lint Checks
+        run: ./gradlew lintDebug -s
+
+      - name: Run Debug Unit Tests
+        run: ./gradlew testDebug -s
+
+      - name: Publish Unit Test Report
+        uses: EnricoMi/publish-unit-test-result-action@v2.17.0
+        if: always()
+        with:
+          check_name: "Unit Test Results"
+          comment_mode: off
+          files: |
+            app-compose/build/test-results/**/TEST-*.xml
+
+      - name: Cache AVD
+        uses: actions/cache@v4.0.2
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ env.ANDROID_API_LEVEL }}
+
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2.32.0
+        with:
+          api-level: ${{ env.ANDROID_API_LEVEL }}
+          arch: x86_64
+          target: google_apis
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
+
+      - name: Run Debug Instrumentation Tests on Android API ${{ matrix.api-level }} (Ran up to 2 times)
+        uses: reactivecircus/android-emulator-runner@v2.32.0
+        with:
+          api-level: ${{ env.ANDROID_API_LEVEL }}
+          arch: x86_64
+          target: google_apis
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: ./gradlew connectedDebugAndroidTest -s || ./gradlew connectedDebugAndroidTest -s
+
+      - name: Publish Integration Test Report
+        uses: EnricoMi/publish-unit-test-result-action@v2.17.0
+        if: always()
+        with:
+          check_name: "Integration Test Results"
+          comment_mode: off
+          files: |
+            app-compose/build/outputs/androidTest-results/**/TEST-*.xml
+
+      - name: Build Debug APK artifact for upload
+        run: ./gradlew assembleDebug -s
+
+      - name: Build Release APK artifact for upload
+        run: ./gradlew assembleRelease -s
+
+      - name: Upload Reports
+        if: github.repository == 'jaredsburrows/android-pokedex' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: com.burrowsapps.gif.search-reports-${{ github.workflow }}-${{ github.run_id }}
+          path: |
+            app-compose/build/reports
+            app-compose/build/test-results
+            app-compose/build/outputs/androidTest-results
+
+      - name: Upload Debug APK artifact
+        if: github.repository == 'jaredsburrows/android-pokedex' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: com.burrowsapps.pokedex-debug-${{ github.workflow }}-${{ github.run_id }}.apk
+          path: app-compose/build/outputs/apk/debug/app-debug.apk
+
+      - name: Upload Release APK artifact
+        if: github.repository == 'jaredsburrows/android-pokedex' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: com.burrowsapps.pokedex-release-${{ github.workflow }}-${{ github.run_id }}.apk
+          path: app-compose/build/outputs/apk/release/app-release.apk
