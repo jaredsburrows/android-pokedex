@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- App Titles -->
+  <string name="app_name">Pokédex</string>
+  <string name="pokemon_list_screen_title">Pokédex</string>
+  <string name="pokemon_info_screen_title">Pokémon</string>
+  <string name="license_screen_title">Open Source Licenses</string>
+
+  <!-- Content Descriptions -->
+  <string name="menu_back">Back</string>
+  <string name="menu_close">Close</string>
+  <string name="menu_more">More</string>
+</resources>

@@ -1,0 +1,119 @@
+[versions]
+# plugins
+# See https://developer.android.com/build/releases/gradle-plugin
+android = "8.3.2"
+dagger = "2.51.1"
+# libraries
+accompanist = "0.34.0"
+activity = "1.8.2"
+# See https://androidx.dev/storage/compose-compiler/repository
+compose = "1.6.5"
+compose-compiler = "1.5.11"
+material = "1.6.5"
+glide = "4.16.0"
+kotlinx = "1.8.0"
+landscapist = "2.3.2"
+leakcanary = "2.13"
+lifecycle = "2.7.0"
+moshi = "1.15.1"
+okhttp = "4.12.0"
+retrofit = "2.11.0"
+robolectric = "4.12.1"
+# language
+java = "11"
+kotlin = "1.9.23"
+# build
+sdk-compile = "34"
+sdk-min = "26"
+sdk-target = "34"
+# signing
+debug-alias = "androiddebugkey"
+debug-password = "android"
+espresso-core = "3.5.1"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "android" }
+android-library = { id = "com.android.library", version.ref = "android" }
+ksp = { id = "com.google.devtools.ksp", version = "1.9.23-1.0.20" }
+dagger = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version = "12.1.0" }
+versions = { id = "com.github.ben-manes.versions", version = "0.51.0" }
+oss-licenses = { id = "com.google.android.gms.oss-licenses-plugin", version = "0.10.6" }
+
+[libraries]
+google-oss-licenses-plugin = { group = "com.google.android.gms", name = "oss-licenses-plugin", version = "0.10.6" }
+android-desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.0.4" }
+androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
+androidx-annotation = { module = "androidx.annotation:annotation", version = "1.7.1" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version = "2024.04.00" }
+androidx-compose-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "compose-compiler" }
+androidx-compose-material = { module = "androidx.compose.material:material", version = "1.6.5" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.2.1" }
+androidx-compose-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "material" }
+androidx-compose-material-icons-android = { module = "androidx.compose.material:material-icons-core-android", version.ref = "material" }
+androidx-compose-material-icons-extended-android = { module = "androidx.compose.material:material-icons-extended-android", version.ref = "material" }
+androidx-compose-navigation = { module = "androidx.navigation:navigation-compose", version = "2.7.7" }
+androidx-compose-paging = { module = "androidx.paging:paging-compose", version = "3.2.1" }
+androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+androidx-compose-uimanifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
+androidx-compose-uitooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+androidx-compose-uitoolingpreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+androidx-compose-junit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
+androidx-core = { module = "androidx.core:core-ktx", version = "1.12.0" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+androidx-hilt-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.2.0" }
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime-ktx", version = "3.2.1" }
+androidx-startup = { module = "androidx.startup:startup-runtime", version = "1.1.1" }
+androidx-test-annotation = { module = "androidx.test:annotation", version = "1.0.1" }
+androidx-test-core = { module = "androidx.test:core", version = "1.5.0" }
+androidx-test-junit = { module = "androidx.test.ext:junit", version = "1.1.5" }
+androidx-test-orchestrator = { module = "androidx.test:orchestrator", version = "1.4.2" }
+androidx-test-rules = { module = "androidx.test:rules", version = "1.5.0" }
+androidx-test-runner = { module = "androidx.test:runner", version = "1.5.2" }
+androidx-webkit = { module = "androidx.webkit:webkit", version = "1.10.0" }
+bumptech-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+bumptech-glide-ksp = { module = "com.github.bumptech.glide:ksp", version.ref = "glide" }
+bumptech-glide-okhttp = { module = "com.github.bumptech.glide:okhttp3-integration", version.ref = "glide" }
+glassfish-javax-annotation = { module = "org.glassfish:javax.annotation", version = "10.0-b28" }
+google-accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
+google-accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
+google-findbugs-jsr305 = { module = "com.google.code.findbugs:jsr305", version = "3.0.2" }
+google-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
+google-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
+google-hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "dagger" }
+google-material = { module = "com.google.android.material:material", version = "1.11.0" }
+google-truth = { module = "com.google.truth:truth", version = "1.4.2" }
+jakewharton-timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
+#noinspection GradleDependency
+javax-annotation-jsr250 = { module = "javax.annotation:jsr250-api", version = "1.0" }
+junit = { module = "junit:junit", version = "4.13.2" }
+kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx" }
+kotlinx-coroutines-bom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "kotlinx" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx" }
+kotlinx-coroutinesjdk8 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8", version.ref = "kotlinx" }
+landscapist-animation = { module = "com.github.skydoves:landscapist-animation", version.ref = "landscapist" }
+landscapist-glide = { module = "com.github.skydoves:landscapist-glide", version.ref = "landscapist" }
+landscapist-palette = { module = "com.github.skydoves:landscapist-palette", version.ref = "landscapist" }
+mockito-inline = { module = "org.mockito:mockito-inline", version = "5.2.0" }
+mockito-kotlin = { module = "com.nhaarman.mockitokotlin2:mockito-kotlin", version = "2.2.0" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+robolectric-annotations = { module = "org.robolectric:annotations", version.ref = "robolectric" }
+squareup-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android-startup", version.ref = "leakcanary" }
+squareup-leakcanary-instrumentation = { module = "com.squareup.leakcanary:leakcanary-android-instrumentation", version.ref = "leakcanary" }
+squareup-moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+squareup-moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "moshi" }
+squareup-moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
+squareup-okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+squareup-okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttp" }
+squareup-okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+squareup-okhttp-mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "okhttp" }
+squareup-okio = { module = "com.squareup.okio:okio", version = "3.9.0" }
+squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+squareup-retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+squareup-retrofit-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit" }
