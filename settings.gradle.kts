@@ -8,13 +8,6 @@ pluginManagement {
         includeGroupByRegex("androidx.*")
       }
     }
-    maven("https://androidx.dev/storage/compose-compiler/repository/") {
-      name = "compose-compiler"
-      content {
-        // this repository *only* contains compose-compiler artifacts
-        includeGroup("androidx.compose.compiler")
-      }
-    }
     gradlePluginPortal()
   }
 }
@@ -29,13 +22,6 @@ dependencyResolutionManagement {
         includeGroupByRegex("com\\.android.*")
         includeGroupByRegex("com\\.google.*")
         includeGroupByRegex("androidx.*")
-      }
-    }
-    maven("https://androidx.dev/storage/compose-compiler/repository/") {
-      name = "compose-compiler"
-      content {
-        // this repository *only* contains compose-compiler artifacts
-        includeGroup("androidx.compose.compiler")
       }
     }
     gradlePluginPortal()
