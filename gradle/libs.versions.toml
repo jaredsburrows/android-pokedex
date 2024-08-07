@@ -33,7 +33,7 @@ versions = { id = "com.github.ben-manes.versions", version = "0.51.0" }
 [libraries]
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version = "3.6.1" }
 google-oss-licenses = { group = "com.google.android.gms", name = "oss-licenses-plugin", version.ref = "licenses" }
-androidx-compose-paging = { module = "androidx.paging:paging-compose", version = "3.3.1" }
+androidx-compose-paging = { module = "androidx.paging:paging-compose", version = "3.3.2" }
 androidx-compose-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "material" }
 androidx-compose-material-icons-android = { module = "androidx.compose.material:material-icons-core-android", version.ref = "material" }
 androidx-compose-material-icons-extended-android = { module = "androidx.compose.material:material-icons-extended-android", version.ref = "material" }
