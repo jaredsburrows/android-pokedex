@@ -115,7 +115,7 @@ jobs:
 
       - name: Upload Reports
         if: github.repository == 'jaredsburrows/android-pokedex' && github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v4.3.5
+        uses: actions/upload-artifact@v4.3.6
         with:
           name: com.burrowsapps.gif.search-reports-${{ github.workflow }}-${{ github.run_id }}
           path: |
@@ -125,14 +125,14 @@ jobs:
 
       - name: Upload Debug APK artifact
         if: github.repository == 'jaredsburrows/android-pokedex' && github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v4.3.5
+        uses: actions/upload-artifact@v4.3.6
         with:
           name: com.burrowsapps.pokedex-debug-${{ github.workflow }}-${{ github.run_id }}.apk
           path: app-compose/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Release APK artifact
         if: github.repository == 'jaredsburrows/android-pokedex' && github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v4.3.5
+        uses: actions/upload-artifact@v4.3.6
         with:
           name: com.burrowsapps.pokedex-release-${{ github.workflow }}-${{ github.run_id }}.apk
           path: app-compose/build/outputs/apk/release/app-release.apk
